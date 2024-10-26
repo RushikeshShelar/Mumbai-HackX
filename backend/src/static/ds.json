@@ -1,0 +1,86 @@
+{
+    "subject_name": "Data Structures",
+    "questions": [
+      {
+        "question": "What is the time complexity of accessing an element in an array?",
+        "options": ["O(1)", "O(n)", "O(log n)", "O(n^2)"],
+        "correct_answer": "O(1)"
+      },
+      {
+        "question": "Which data structure allows insertion and deletion from both ends?",
+        "options": ["Queue", "Stack", "Deque", "Array"],
+        "correct_answer": "Deque"
+      },
+      {
+        "question": "Which traversal method is used for Depth First Traversal in a Binary Tree?",
+        "options": ["Inorder", "Preorder", "Postorder", "All of the above"],
+        "correct_answer": "All of the above"
+      },
+      {
+        "question": "What is the height of a balanced binary tree with n nodes?",
+        "options": ["O(n)", "O(log n)", "O(n^2)", "O(n log n)"],
+        "correct_answer": "O(log n)"
+      },
+      {
+        "question": "Which data structure is commonly used to implement recursion?",
+        "options": ["Queue", "Array", "Linked List", "Stack"],
+        "correct_answer": "Stack"
+      },
+      {
+        "question": "What is the main advantage of a linked list over an array?",
+        "options": [
+          "Random access is faster",
+          "Less memory usage",
+          "Dynamic size adjustment",
+          "Easier to search elements"
+        ],
+        "correct_answer": "Dynamic size adjustment"
+      },
+      {
+        "question": "Which data structure uses a first-in, first-out (FIFO) approach?",
+        "options": ["Stack", "Queue", "Linked List", "Deque"],
+        "correct_answer": "Queue"
+      },
+      {
+        "question": "What is the maximum number of children each node can have in a binary tree?",
+        "options": ["1", "2", "3", "4"],
+        "correct_answer": "2"
+      },
+      {
+        "question": "Which sorting algorithm is considered the fastest in practice?",
+        "options": ["Bubble Sort", "Merge Sort", "Insertion Sort", "Quick Sort"],
+        "correct_answer": "Quick Sort"
+      },
+      {
+        "question": "In a binary search tree, where are the nodes with smaller values stored?",
+        "options": ["Left subtree", "Right subtree", "Root node", "Leaves"],
+        "correct_answer": "Left subtree"
+      },
+      {
+        "question": "Which data structure uses Last In, First Out (LIFO) ordering?",
+        "options": ["Queue", "Array", "Stack", "Deque"],
+        "correct_answer": "Stack"
+      },
+      {
+        "question": "What is the worst-case time complexity of Quick Sort?",
+        "options": ["O(n)", "O(n log n)", "O(n^2)", "O(log n)"],
+        "correct_answer": "O(n^2)"
+      },
+      {
+        "question": "Which tree has a balance factor of -1, 0, or +1 for each node?",
+        "options": ["AVL Tree", "Binary Tree", "B-Tree", "Heap"],
+        "correct_answer": "AVL Tree"
+      },
+      {
+        "question": "In a stack, which operation removes the top element?",
+        "options": ["Push", "Pop", "Peek", "Insert"],
+        "correct_answer": "Pop"
+      },
+      {
+        "question": "Which data structure is best suited for implementing a priority queue?",
+        "options": ["Stack", "Heap", "Deque", "Binary Tree"],
+        "correct_answer": "Heap"
+      }
+    ]
+  }
+  

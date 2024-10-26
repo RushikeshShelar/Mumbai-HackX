@@ -1,0 +1,81 @@
+{
+    "subject_name": "Computer Networks",
+    "questions": [
+      {
+        "question": "What is TCP primarily used for?",
+        "options": ["Connectionless", "Reliable Data", "Encryption", "IP Assignment"],
+        "correct_answer": "Reliable Data"
+      },
+      {
+        "question": "Which OSI layer is responsible for IP addressing?",
+        "options": ["Application", "Network", "Transport", "Session"],
+        "correct_answer": "Network"
+      },
+      {
+        "question": "Which protocol finds the local device's hardware address?",
+        "options": ["DNS", "DHCP", "ARP", "SMTP"],
+        "correct_answer": "ARP"
+      },
+      {
+        "question": "What is a 'packet' in networks?",
+        "options": ["Segment", "Message", "Device", "Encryption"],
+        "correct_answer": "Segment"
+      },
+      {
+        "question": "What does a router do?",
+        "options": ["Filter", "Transfer Data", "Connect Networks", "Security"],
+        "correct_answer": "Connect Networks"
+      },
+      {
+        "question": "Which topology has all nodes connected to a central hub?",
+        "options": ["Ring", "Bus", "Star", "Mesh"],
+        "correct_answer": "Star"
+      },
+      {
+        "question": "What does DHCP do?",
+        "options": ["Resolve Domain Names", "Allocate IPs", "Encrypt", "Send Emails"],
+        "correct_answer": "Allocate IPs"
+      },
+      {
+        "question": "Which protocol uses port 80?",
+        "options": ["FTP", "HTTP", "SMTP", "DNS"],
+        "correct_answer": "HTTP"
+      },
+      {
+        "question": "Which layer ensures data packets arrive error-free?",
+        "options": ["Data Link", "Network", "Transport", "Session"],
+        "correct_answer": "Transport"
+      },
+      {
+        "question": "Which device connects different network architectures?",
+        "options": ["Router", "Bridge", "Repeater", "Hub"],
+        "correct_answer": "Bridge"
+      },
+      {
+        "question": "Which protocol secures communication over the Internet?",
+        "options": ["FTP", "Telnet", "HTTPS", "SMTP"],
+        "correct_answer": "HTTPS"
+      },
+      {
+        "question": "What is a firewall's primary function?",
+        "options": ["Encrypt", "Block IPs", "Filter Traffic", "Manage DNS"],
+        "correct_answer": "Filter Traffic"
+      },
+      {
+        "question": "What is the maximum size of an IPv4 address?",
+        "options": ["4 bytes", "8 bytes", "16 bytes", "32 bytes"],
+        "correct_answer": "4 bytes"
+      },
+      {
+        "question": "Which layer is responsible for MAC addressing?",
+        "options": ["Physical", "Data Link", "Network", "Transport"],
+        "correct_answer": "Data Link"
+      },
+      {
+        "question": "What protocol is used to resolve domain names to IPs?",
+        "options": ["SMTP", "HTTP", "DNS", "FTP"],
+        "correct_answer": "DNS"
+      }
+    ]
+  }
+  
