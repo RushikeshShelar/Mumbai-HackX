@@ -1,0 +1,101 @@
+{
+    "subject_name": "Operating Systems",
+    "questions": [
+      {
+        "question": "What is the main purpose of an operating system?",
+        "options": [
+          "To manage resources",
+          "To run applications",
+          "To provide networking",
+          "To allow multitasking"
+        ],
+        "correct_answer": "To manage resources"
+      },
+      {
+        "question": "Which memory management technique allocates memory only when needed?",
+        "options": ["Segmentation", "Paging", "Swapping", "Demand Paging"],
+        "correct_answer": "Demand Paging"
+      },
+      {
+        "question": "Which of these scheduling algorithms may lead to starvation?",
+        "options": ["Round Robin", "First-Come, First-Served", "Shortest Job Next", "Priority Scheduling"],
+        "correct_answer": "Priority Scheduling"
+      },
+      {
+        "question": "What is a system call?",
+        "options": [
+          "A request to run an application",
+          "A user program command",
+          "A request for an OS service",
+          "A network call"
+        ],
+        "correct_answer": "A request for an OS service"
+      },
+      {
+        "question": "Which OS feature allows multiple users on a single machine?",
+        "options": ["Multithreading", "Multiprogramming", "Multi-user", "Multitasking"],
+        "correct_answer": "Multi-user"
+      },
+      {
+        "question": "What is the purpose of virtual memory?",
+        "options": ["To extend RAM", "To optimize CPU", "To manage devices", "To enhance security"],
+        "correct_answer": "To extend RAM"
+      },
+      {
+        "question": "What is a deadlock in an OS?",
+        "options": [
+          "When two processes share resources",
+          "When processes cannot continue",
+          "When memory is full",
+          "When files are locked"
+        ],
+        "correct_answer": "When processes cannot continue"
+      },
+      {
+        "question": "What is the page replacement algorithm's role?",
+        "options": ["To replace processes", "To swap files", "To allocate memory", "To manage page faults"],
+        "correct_answer": "To manage page faults"
+      },
+      {
+        "question": "Which technique allows I/O without CPU intervention?",
+        "options": ["Interrupts", "Polling", "DMA", "Paging"],
+        "correct_answer": "DMA"
+      },
+      {
+        "question": "Which component schedules processes in a system?",
+        "options": ["Compiler", "Scheduler", "Interpreter", "Memory Manager"],
+        "correct_answer": "Scheduler"
+      },
+      {
+        "question": "In process states, what follows the ‘Ready’ state?",
+        "options": ["Running", "Blocked", "Waiting", "Terminated"],
+        "correct_answer": "Running"
+      },
+      {
+        "question": "What is the primary role of the OS kernel?",
+        "options": ["Interface", "Network", "Resource Management", "Database"],
+        "correct_answer": "Resource Management"
+      },
+      {
+        "question": "Which is NOT an OS type?",
+        "options": ["Batch", "Time-Sharing", "Distributed", "Linked"],
+        "correct_answer": "Linked"
+      },
+      {
+        "question": "What is the purpose of the OS shell?",
+        "options": ["Memory", "Hardware Interface", "User Interface", "Networking"],
+        "correct_answer": "User Interface"
+      },
+      {
+        "question": "What is thrashing in an OS?",
+        "options": [
+          "Swapping",
+          "High Page Faults",
+          "Deadlock",
+          "Slow processing"
+        ],
+        "correct_answer": "High Page Faults"
+      }
+    ]
+  }
+  

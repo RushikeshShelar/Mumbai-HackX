@@ -13,6 +13,8 @@ import {
     removeModuleFromSubject,
     updateDifficultyLevel
 } from '../db/userProfile'; // Adjust the import path as necessary
+import axios from 'axios';
+import { generateLearningPath } from '../Llama';
 
 class UserProfileController {
     // Create a new user profile
@@ -20,6 +22,25 @@ class UserProfileController {
         const { userId, preferences } = req.body;
         try {
             const newUserProfile = await createUserProfile(userId, preferences);
+            return res.status(201).json(newUserProfile);
+        } catch (error) {
+            return res.status(500).json({ error: error.message });
+        }
+    }
+
+    static async createProfileAndGeneratePath(req: Request, res: Response) {
+        const { userId, preferences, subject, } = req.body; // Get user ID, preferences, and answers
+        try {
+            // Step 1: Create the user profile
+            const newUserProfile = await createUserProfile(userId, preferences);
+
+            // Step 2: Send data to Llama model to generate learning path
+            const response = await generateLearningPath(subject, preferences.pace, preferences.style );
+
+            // Step 3: Update user profile with the generated learning path
+            newUserProfile.learningPath = response.learningPath;
+            await newUserProfile.save();
+
             return res.status(201).json(newUserProfile);
         } catch (error) {
             return res.status(500).json({ error: error.message });

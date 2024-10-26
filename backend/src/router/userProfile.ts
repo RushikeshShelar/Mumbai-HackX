@@ -3,7 +3,7 @@ import express from 'express';
 import UserProfileController from '../controllers/userProfile';
 
 const userProfile = (router: express.Router) => {
-    router.post('/api/user-profile', UserProfileController.createProfile);
+    router.post('/api/user-profile', UserProfileController.createProfileAndGeneratePath);
     router.get('/api/user-profile/:userId', UserProfileController.getProfile);
     router.put('/api/user-profile/:userId/preferences', UserProfileController.updatePreferences);
     router.delete('/api/user-profile/:userId', UserProfileController.deleteProfile);

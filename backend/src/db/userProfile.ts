@@ -2,10 +2,18 @@ import { Schema, model, Document, Types } from 'mongoose';
 import UserModel from './users';
 
 // Interfaces
+interface Chapter extends Document {
+    chapterName: string;
+    isCompleted: boolean;
+    videoLink?: string; // Link to the video for the chapter
+    articleLink?: string; // Link to the article for the chapter
+}
+
 interface Module extends Document {
     moduleName: string;
     difficulty: number;
     status: 'not started' | 'in progress' | 'completed';
+    isCompleted: boolean;
     performance: {
         attemptDate: Date;
         success?: boolean;
@@ -13,7 +21,8 @@ interface Module extends Document {
     }[];
     description?: string;
     lastAttemptedAt?: Date;
-    feedback?: string[]; // Changed feedback to an array
+    feedback?: string[];
+    chapters: Types.DocumentArray<Chapter>;
 }
 
 interface Subject extends Document {
@@ -42,10 +51,18 @@ interface UserProfile extends Document {
 }
 
 // Schemas
+const ChapterSchema = new Schema<Chapter>({
+    chapterName: { type: String, required: true },
+    isCompleted: { type: Boolean, default: false },
+    videoLink: { type: String }, // Video link for chapter content
+    articleLink: { type: String } // Article link for chapter content
+});
+
 const ModuleSchema = new Schema<Module>({
     moduleName: { type: String, required: true },
     difficulty: { type: Number, required: true },
     status: { type: String, enum: ['not started', 'in progress', 'completed'], default: 'not started' },
+    isCompleted: { type: Boolean, default: false },
     performance: [
         {
             attemptDate: { type: Date, required: true },
@@ -55,7 +72,8 @@ const ModuleSchema = new Schema<Module>({
     ],
     description: String,
     lastAttemptedAt: Date,
-    feedback: [String] // Changed feedback to an array of strings
+    feedback: [String],
+    chapters: [ChapterSchema]
 });
 
 const SubjectSchema = new Schema<Subject>({

@@ -3,6 +3,9 @@ import mongoose from 'mongoose';
 import UserModel, { createUser } from './users';
 import { authentication, random } from '../helpers'; // Adjust the path as necessary
 import UserProfileModel from './userProfile';
+import fs from 'fs';
+import path from 'path';
+import Question from './questions';
 
 // Connect to the MongoDB database
 const connectDB = async () => {
@@ -22,7 +25,7 @@ const connectDB = async () => {
 
 // Function to seed the database
 const seedUsers = async () => {
-    await UserModel.deleteMany({}); 
+    await UserModel.deleteMany({});
     const users = [
         {
             username: 'admin',
@@ -59,6 +62,7 @@ const seedUsers = async () => {
 };
 
 const seedUserProfiles = async () => {
+    await UserProfileModel.deleteMany({});
     const users = await UserModel.find(); // Fetch existing users from the database
     const userProfiles = users.map(user => ({
         user: user._id, // Reference the user ID
@@ -76,10 +80,37 @@ const seedUserProfiles = async () => {
     console.log(`${userProfiles.length} user profiles created`);
 };
 
+
+const seedQuestions = async () => {
+    // Updated path to read files from src/static
+    await Question.deleteMany({});
+    const files = ['ds.json', 'os.json', 'cn.json'];
+
+    for (const file of files) {
+        const filePath = path.join(__dirname, '../static', file); // Adjusted path to access the static folder
+        const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+
+
+        const questionsToInsert = {
+            subject: data.subject_name,
+            questions: data.questions // Assuming each file has an array under 'questions'
+        };
+
+        try {
+            await Question.create(questionsToInsert);
+            console.log(`Successfully added questions from ${file}`);
+        } catch (error) {
+            console.error(`Error adding questions from ${file}:`, error);
+        }
+    }
+};
+
+
 const runSeeder = async () => {
     await connectDB();
     await seedUsers();
     await seedUserProfiles();
+    await seedQuestions();
     mongoose.disconnect();
 };
 
