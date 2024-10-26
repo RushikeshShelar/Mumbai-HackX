@@ -20,7 +20,8 @@ const userProfile = (router: express.Router) => {
     router.post('/api/user-profile/:userId/learning-path/:subjectName/module', UserProfileController.addModule);
     router.put('/api/user-profile/:userId/learning-path/:subjectName/module/:moduleName', UserProfileController.updateModule);
     router.delete('/api/user-profile/:userId/learning-path/:subjectName/module/:moduleName', UserProfileController.removeModule);
-
+    router.get('/user/:userId/subject/:subjectName/module/:moduleId', UserProfileController.getModuleById);
+    
     // Difficulty level route
     router.put('/api/user-profile/:userId/difficulty', UserProfileController.updateDifficulty);
 };

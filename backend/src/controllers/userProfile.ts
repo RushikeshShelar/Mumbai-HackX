@@ -11,12 +11,30 @@ import {
     addModuleToSubject,
     updateModuleInSubject,
     removeModuleFromSubject,
-    updateDifficultyLevel
+    updateDifficultyLevel,
+    getModuleById
 } from '../db/userProfile'; // Adjust the import path as necessary
 import axios from 'axios';
 import { evaluateLearningStyle, generateLearningPath } from '../Llama';
 
 class UserProfileController {
+
+    // UserProfileController.js
+
+    static async getModuleById(req: Request, res: Response) {
+        const { userId, subjectName, moduleId } = req.params; // Extract userId, subjectName, and moduleId from the request parameters
+        try {
+            const module = await getModuleById(userId, subjectName, moduleId); // Call the database function
+            if (!module) {
+                return res.status(404).json({ message: 'Module not found' });
+            }
+            return res.status(200).json(module); // Return the found module
+        } catch (error) {
+            return res.status(500).json({ error: error.message }); // Handle any errors
+        }
+    }
+
+
     // Create a new user profile
     static async createProfile(req: Request, res: Response) {
         const { userId, preferences } = req.body;
@@ -52,7 +70,6 @@ class UserProfileController {
         try {
             const userProfile = await getUserProfile(userId);
             for (const sub of subject) {
-                console.log(sub)
                 // Step 1: Find the user profile
                 if (!userProfile) {
                     return res.status(404).json({ error: "User profile not found" });
@@ -85,13 +102,15 @@ class UserProfileController {
     }
 
     static async getPreference(req: Request, res: Response) {
+        console.log("IN GET PREF")
         const { options, userId } = req.body;
-        console.log(options);
         try {
             const preference = await evaluateLearningStyle(options);
+            console.log(preference, options, userId)
             return res.status(200).json({ preference, userId });
         } catch (error) {
-
+            res.status(500).json(error);
+            console.log(error);
         }
 
     }

@@ -6,18 +6,18 @@ import { authentication, random } from '../helpers';
 export const login = async (req: express.Request, res: express.Response) => {
     try {
         const { email, password } = req.body;
-        if(!email || !password) {
+        if (!email || !password) {
             return res.sendStatus(400).json('Missing Parameters');
         }
 
         const user = await getUserByEmail(email).select('+authentication.salt +authentication.password');
 
-        if(!user) {
+        if (!user) {
             return res.sendStatus(400).json('User does not exist');
         }
 
         const expectedHash = authentication(user.authentication.salt, password);
-        if(user.authentication.password !== expectedHash) {
+        if (user.authentication.password !== expectedHash) {
             return res.sendStatus(403).json('Invalid Password');
         }
 
@@ -26,9 +26,20 @@ export const login = async (req: express.Request, res: express.Response) => {
 
         await user.save();
 
-        res.cookie('RUSHI-AUTH', user.authentication.sessionToken, { domain : 'localhost', path: '/'});
-        res.cookie('userId', user.username, { domain : 'localhost', path: '/'});
-
+        res.cookie('RUSHI-AUTH', user.authentication.sessionToken, {
+            path: '/',
+            httpOnly: false,
+            secure: false, // Only set to `true` in production with HTTPS
+            sameSite: 'lax', // Allows the cookie to be sent across origins (adjust as needed)
+        });
+        
+        res.cookie('userId', user.username, {
+            path: '/',
+            httpOnly: false,
+            secure: false, // Only set to `true` in production with HTTPS
+            sameSite: 'lax', // Adjust `sameSite` as needed
+        });
+        
         res.status(200).json(user);
 
     } catch (error) {
