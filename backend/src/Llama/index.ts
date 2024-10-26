@@ -6,7 +6,7 @@ dotenv.config();
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 // Function to generate a structured learning path
-export async function generateLearningPath(subject:string, pace:string, style:string) {
+export async function generateLearningPath(subject: string, pace: string, style: string) {
   const learningPath = {
     learningPath: [
       {
@@ -94,4 +94,57 @@ export async function generateLearningPath(subject:string, pace:string, style:st
 
   // Return the parsed JSON
   return learningPathJson;
+}
+
+export async function evaluateLearningStyle(answers: string) {
+  // Construct the prompt for Groq
+
+  const customPrompt = `
+    Based on the following student answers, determine the preferred learning style (audio, visual, reading) and learning pace (slow, medium, fast). 
+    Answers: ${answers}
+
+    Provide the learning style and pace in JSON format with the keys "learningStyle" and "learningPace".
+  `;
+  console.log(answers);
+  // Call the Groq API to get the chat completion
+  const chatCompletion = await groq.chat.completions.create({
+    model: "llama3-70b-8192",
+    messages: [
+      {
+        role: "user",
+        content: customPrompt,
+      },
+    ],
+    temperature: 1,
+    max_tokens: 2048,
+    top_p: 1,
+    stream: true,
+    stop: null,
+  });
+
+  let output = '';
+  // Handle the stream data to print the completion returned by the LLM.
+  for await (const chunk of chatCompletion) {
+    output += chunk.choices[0]?.delta?.content || '';
+  }
+
+  // Extract and store only the JSON part
+  let learningStyleJson;
+  const jsonStartIndex = output.indexOf('{'); // Find the starting index of the JSON part
+  const jsonEndIndex = output.lastIndexOf('}'); // Find the ending index of the JSON part
+
+  if (jsonStartIndex !== -1 && jsonEndIndex !== -1) {
+    const jsonString = output.slice(jsonStartIndex, jsonEndIndex + 1);
+    try {
+      learningStyleJson = JSON.parse(jsonString);
+    } catch (error) {
+      console.error("Error parsing JSON:", error);
+      learningStyleJson = { error: "Failed to parse JSON response." };
+    }
+  } else {
+    learningStyleJson = { error: "JSON part not found in the response." };
+  }
+
+  // Return the parsed JSON
+  return learningStyleJson;
 }

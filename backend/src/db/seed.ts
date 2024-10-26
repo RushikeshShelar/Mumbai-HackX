@@ -26,6 +26,7 @@ const connectDB = async () => {
 // Function to seed the database
 const seedUsers = async () => {
     await UserModel.deleteMany({});
+    await UserProfileModel.deleteMany({});
     const users = [
         {
             username: 'admin',
@@ -62,7 +63,7 @@ const seedUsers = async () => {
 };
 
 const seedUserProfiles = async () => {
-    await UserProfileModel.deleteMany({});
+    
     const users = await UserModel.find(); // Fetch existing users from the database
     const userProfiles = users.map(user => ({
         user: user._id, // Reference the user ID
@@ -109,7 +110,7 @@ const seedQuestions = async () => {
 const runSeeder = async () => {
     await connectDB();
     await seedUsers();
-    await seedUserProfiles();
+    // await seedUserProfiles();
     await seedQuestions();
     mongoose.disconnect();
 };
