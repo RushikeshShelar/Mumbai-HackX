@@ -69,7 +69,7 @@ const seedUserProfiles = async () => {
         user: user._id, // Reference the user ID
         learningPreferences: {
             style: 'visual', // Example learning style
-            pace: 'moderate', // Example learning pace
+            pace: 'medium', // Example learning pace
         },
         learningPath: [], // Start with an empty learning path
         currentDifficultyLevel: 1, // Default difficulty level
@@ -110,7 +110,7 @@ const seedQuestions = async () => {
 const runSeeder = async () => {
     await connectDB();
     await seedUsers();
-    // await seedUserProfiles();
+    await seedUserProfiles();
     await seedQuestions();
     mongoose.disconnect();
 };

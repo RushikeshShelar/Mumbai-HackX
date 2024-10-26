@@ -84,8 +84,8 @@ const SubjectSchema = new Schema<Subject>({
 const UserProfileSchema = new Schema<UserProfile>({
     user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     learningPreferences: {
-        style: { type: String, enum: ['audio', 'visual', 'reading'], required: true },
-        pace: { type: String, enum: ['fast', 'moderate', 'slow'], required: true }
+        style: { type: String, enum: ['audio', 'visual', 'reading'], },
+        pace: { type: String, enum: ['fast', 'medium', 'slow'],  }
     },
     learningPath: [SubjectSchema],
     currentDifficultyLevel: { type: Number, default: 1 },
@@ -352,4 +352,15 @@ export const updateDifficultyLevel = async (userId: string, newDifficulty: numbe
         console.error('Error updating difficulty level:', error);
         throw new Error('Could not update difficulty level');
     }
+};
+
+export const getModuleById = async (userId: string, subjectName: string, moduleId: string) => {
+    const userProfile = await UserProfileModel.findOne({ userId });
+    if (!userProfile) return null;
+
+    const subject = userProfile.learningPath.find(sub => sub.subject === subjectName);
+    if (!subject) return null;
+
+    const module = subject.modules.find(mod => mod._id.toString() === moduleId);
+    return module || null;
 };

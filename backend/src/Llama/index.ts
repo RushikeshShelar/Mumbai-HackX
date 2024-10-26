@@ -105,7 +105,6 @@ export async function evaluateLearningStyle(answers: string) {
 
     Provide the learning style and pace in JSON format with the keys "learningStyle" and "learningPace".
   `;
-  console.log(answers);
   // Call the Groq API to get the chat completion
   const chatCompletion = await groq.chat.completions.create({
     model: "llama3-70b-8192",
@@ -122,6 +121,7 @@ export async function evaluateLearningStyle(answers: string) {
     stop: null,
   });
 
+  console.log("COMPLETION",chatCompletion);
   let output = '';
   // Handle the stream data to print the completion returned by the LLM.
   for await (const chunk of chatCompletion) {
