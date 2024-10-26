@@ -27,6 +27,7 @@ export const login = async (req: express.Request, res: express.Response) => {
         await user.save();
 
         res.cookie('RUSHI-AUTH', user.authentication.sessionToken, { domain : 'localhost', path: '/'});
+        res.cookie('userId', user.username, { domain : 'localhost', path: '/'});
 
         res.status(200).json(user);
 

@@ -14,7 +14,7 @@ import {
     updateDifficultyLevel
 } from '../db/userProfile'; // Adjust the import path as necessary
 import axios from 'axios';
-import { generateLearningPath } from '../Llama';
+import { evaluateLearningStyle, generateLearningPath } from '../Llama';
 
 class UserProfileController {
     // Create a new user profile
@@ -35,7 +35,7 @@ class UserProfileController {
             const newUserProfile = await createUserProfile(userId, preferences);
 
             // Step 2: Send data to Llama model to generate learning path
-            const response = await generateLearningPath(subject, preferences.pace, preferences.style );
+            const response = await generateLearningPath(subject, preferences.pace, preferences.style);
 
             // Step 3: Update user profile with the generated learning path
             newUserProfile.learningPath = response.learningPath;
@@ -46,6 +46,56 @@ class UserProfileController {
             return res.status(500).json({ error: error.message });
         }
     }
+
+    static async insertTrackInLearningPath(req: Request, res: Response) {
+        const { userId, subject, preferences } = req.body; // Get user ID, subject, and new track details
+        try {
+            const userProfile = await getUserProfile(userId);
+            for (const sub of subject) {
+                console.log(sub)
+                // Step 1: Find the user profile
+                if (!userProfile) {
+                    return res.status(404).json({ error: "User profile not found" });
+                }
+
+                const newTrack = await generateLearningPath(sub, preferences.pace, preferences.style);
+
+                // Step 2: Find the existing learning path for the specified subject
+                const existingPathIndex = userProfile.learningPath.findIndex(
+                    (path) => path.subject === sub
+                );
+
+                if (existingPathIndex !== -1) {
+                    // If the subject exists, push the new track to the existing modules
+                    userProfile.learningPath[existingPathIndex].modules.push(newTrack.learningPath[0]);
+                } else {
+                    // If the subject does not exist, optionally create a new entry
+                    userProfile.learningPath.push(newTrack.learningPath[0]);
+                }
+
+                // Step 3: Save the updated user profile
+                await userProfile.save();
+            }
+
+            return res.status(200).json({ userProfile });
+        } catch (error) {
+            console.error("Error inserting track in learning path:", error);
+            return res.status(500).json({ error: error.message });
+        }
+    }
+
+    static async getPreference(req: Request, res: Response) {
+        const { options, userId } = req.body;
+        console.log(options);
+        try {
+            const preference = await evaluateLearningStyle(options);
+            return res.status(200).json({ preference, userId });
+        } catch (error) {
+
+        }
+
+    }
+
 
     // Get user profile by user ID
     static async getProfile(req: Request, res: Response) {

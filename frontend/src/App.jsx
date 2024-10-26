@@ -9,6 +9,7 @@ import Videos from './components/learning/modules/Videos';
 import Navbar from './components/navbar/Navbar';
 import Onboarding from './components/onboarding/Onboarding';
 import Registration from './components/registration/Registration';
+import Login from './components/login/Login';
 
 const appRouter= createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const appRouter= createBrowserRouter([
 {
   path:'/registration',
   element:<Registration/>
+},
+{
+  path:'/login',
+  element:<Login/>
 },
 {
   path:'/onboarding',
