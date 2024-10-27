@@ -10,7 +10,9 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const openai = new OpenAI({
-  apiKey:  'APIKEYHERE',
+
+  apiKey: 'Your_API_KEY',
+
 });
 
 // Enhanced helper function to check for education-related keywords

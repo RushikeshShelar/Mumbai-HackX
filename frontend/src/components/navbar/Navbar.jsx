@@ -1,4 +1,5 @@
 import React from 'react';
+import logo from "./logo.png"
 import { Link } from 'react-router-dom'
 import { BookOpen, Rocket, Users, Zap } from 'lucide-react';
 import img from './student.png'
@@ -12,8 +13,8 @@ export default function EdTechLandingPage() {
           <div className="flex justify-between items-center py-4 md:justify-start md:space-x-10">
             <div className="flex justify-start lg:w-0 lg:flex-1">
               <a href="#" className="flex items-center">
-                <BookOpen className="h-8 w-auto sm:h-10 text-indigo-600" />
-                <span className="ml-2 text-xl font-bold text-gray-800">EduTech</span>
+                <img src={logo} height={60} width={150}/>
+                
               </a>
             </div>
             <nav className="hidden md:flex space-x-10">
